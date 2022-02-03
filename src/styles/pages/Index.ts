@@ -35,7 +35,7 @@ export const GithubButton = styled.a`
 
   font-weight: 600;
 
-  transition: 0.2s filter;
+  transition: 0.3s ease-in;
 
   display: flex;
   align-items: center;
@@ -43,6 +43,12 @@ export const GithubButton = styled.a`
 
   &:hover {
     filter: brightness(0.9);
+    border-radius: 1.5rem;
+    background: ${(props) => props.theme.colors.primary};
+
+    svg {
+      color: ${(props) => props.theme.colors.background} !important;
+    }
   }
 `;
 
