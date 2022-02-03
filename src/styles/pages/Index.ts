@@ -42,7 +42,6 @@ export const GithubButton = styled.a`
   justify-content: center;
 
   &:hover {
-    filter: brightness(0.9);
     border-radius: 1.5rem;
     background: ${(props) => props.theme.colors.primary};
 

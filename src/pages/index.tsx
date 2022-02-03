@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 import { FiBook, FiGithub } from "react-icons/fi";
 import { useAuth } from '../hooks/useAuth';
@@ -10,21 +11,28 @@ import * as S from '../styles/pages/Index';
 
 const Home: NextPage = () => {
   const { theme } = useTheme();
-  const { user, signInWithGoogle } = useAuth();
+  const { user, signInWithGoogle, loading } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push('/profile');
+    }
+  }, [user, loading])
 
   async function handleSingIn() {
     if (!user) {
       await signInWithGoogle();
     }
 
-    router.push("/mySecretPage");
+    router.push("/profile");
   }
 
   return (
     <S.Container>
       <Head>
         <title>Bookshelf</title>
+        <link rel="shortcut icon" href="/icons/favicon.svg" type="image/x-icon" />
       </Head>
 
       <S.Navbar>
