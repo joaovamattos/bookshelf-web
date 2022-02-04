@@ -7,7 +7,7 @@ export const Container = styled.button`
   border: 2px solid ${(props) => props.theme.colors.primary};
   border-radius: 0.25rem;
 
-  background: ${(props) => props.theme.colors.background};
+  background: transparent;
 
   display: flex;
   align-items: center;

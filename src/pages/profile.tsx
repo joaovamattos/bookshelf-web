@@ -19,8 +19,6 @@ const Profile: NextPage = () => {
   }, [user, loading])
 
   async function handeSingOut() {
-    console.log('aaaaaaaaaaaaaaaaaaaa');
-
     await signOut();
   }
 

@@ -4,12 +4,12 @@ import { Container, Title } from './styles';
 
 interface ButtonProps {
   title: string;
-  onClick: () => {};
+  onClick: Function;
 }
 
 function Button({ title, onClick }: ButtonProps) {
   return (
-    <Container onClick={onClick}>
+    <Container onClick={() => onClick()}>
       <Title>{title}</Title>
     </Container>
   )
