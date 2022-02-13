@@ -16,7 +16,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (user) {
-      router.push('/profile');
+      router.push('/home');
     }
   }, [user, loading])
 
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
       await signInWithGoogle();
     }
 
-    router.push("/profile");
+    router.push("/home");
   }
 
   return (

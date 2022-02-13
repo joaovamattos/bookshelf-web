@@ -7,6 +7,7 @@ import { useAuth } from '../hooks/useAuth';
 import * as S from '../styles/pages/Profile';
 import Navbar from '../components/Navbar';
 import Button from '../components/Button';
+import Loading from '../components/Loading';
 
 const Profile: NextPage = () => {
   const router = useRouter();
@@ -20,6 +21,10 @@ const Profile: NextPage = () => {
 
   async function handeSingOut() {
     await signOut();
+  }
+
+  if (loading) {
+    return <Loading />;
   }
 
   return (

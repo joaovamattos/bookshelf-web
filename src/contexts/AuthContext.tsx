@@ -41,6 +41,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
           email
         });
 
+        setLoading(false);
       } else {
         setLoading(false)
       }

@@ -16,7 +16,7 @@ function CustomError({ image, message }: CustomErrorProps) {
   const router = useRouter();
 
   const handleGoToHome = () => {
-    router.push('/');
+    router.push('/home');
   }
 
   return (
