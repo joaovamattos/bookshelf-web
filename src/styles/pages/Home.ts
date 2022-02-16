@@ -30,8 +30,6 @@ export const TitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-
-  margin-botom: 1rem;
 `;
 
 export const Row = styled.div`
@@ -59,5 +57,27 @@ export const SeeAllButton = styled.p`
 
   &:hover {
     color: ${(props) => props.theme.colors.secondary};
+  }
+`;
+
+export const BookList = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding-bottom: 1rem;
+  max-width: 42rem;
+  overflow-x: scroll;
+
+  ::-webkit-scrollbar {
+    width: 0.25rem;
+    height: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${(props) => props.theme.colors.background};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.colors.text};
   }
 `;

@@ -8,6 +8,9 @@ import * as S from '../styles/pages/Home';
 import Navbar from '../components/Navbar';
 import Loading from '../components/Loading';
 import NoBooksYet from '../components/NoBooksYet';
+import Book from '../components/Book';
+
+import books from "../services/fakeBooks";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -19,10 +22,6 @@ const Home: NextPage = () => {
     }
   }, [user, loading])
 
-  async function handeSingOut() {
-    await signOut();
-  }
-
   if (loading) {
     return <Loading />;
   }
@@ -32,6 +31,10 @@ const Home: NextPage = () => {
       <Head>
         <title>Bookshelf</title>
         <link rel="shortcut icon" href="/icons/favicon.svg" type="image/x-icon" />
+        <link
+          rel="stylesheet"
+          href="node_modules/@glidejs/glide/dist/css/glide.core.min.css"
+        />
       </Head>
 
       <Navbar />
@@ -53,7 +56,12 @@ const Home: NextPage = () => {
           </S.Row>
           <S.SeeAllButton>Ver todos</S.SeeAllButton>
         </S.TitleWrapper>
-        <NoBooksYet />
+
+        <S.BookList>
+          {books && books.map(book => (
+            <Book book={book} key={book.id} />
+          ))}
+        </S.BookList>
 
         <S.TitleWrapper>
           <S.Row>
