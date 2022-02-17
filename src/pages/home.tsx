@@ -9,12 +9,13 @@ import Navbar from '../components/Navbar';
 import Loading from '../components/Loading';
 import NoBooksYet from '../components/NoBooksYet';
 import Book from '../components/Book';
+import ReadingBook from '../components/ReadingBook';
 
 import books from "../services/fakeBooks";
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const { user, loading, signOut } = useAuth();
+  const { user, loading } = useAuth();
 
   useEffect(() => {
     if (!loading && !user) {
@@ -47,7 +48,7 @@ const Home: NextPage = () => {
           </S.Row>
           <S.SeeAllButton>Ver todos</S.SeeAllButton>
         </S.TitleWrapper>
-        <NoBooksYet />
+        {books && <ReadingBook book={books[3]} />}
 
         <S.TitleWrapper>
           <S.Row>
