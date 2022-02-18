@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
       </Link>
 
       <Row>
-        <Button>
+        <Button onClick={() => router.push('/search')}>
           <TooltipReference {...tooltip}>
             <FiSearch color={theme.colors.text} size={20} />
           </TooltipReference>

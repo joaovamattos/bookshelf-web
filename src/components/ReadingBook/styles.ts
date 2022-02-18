@@ -7,8 +7,8 @@ export const Container = styled.div`
 `;
 
 export const BookCover = styled.img`
-  min-width: 6.25rem;
-  height: 9.375rem;
+  min-width: 7.5rem;
+  height: 11.25rem;
   object-fit: cover;
   margin-right: 1rem;
 `;
@@ -39,6 +39,7 @@ export const Column = styled.div`
 `;
 
 export const ProgressBar = styled.div`
+  margin-top: 0.5rem;
   width: 100%;
   height: 0.25rem;
   background: #c1c1c6;
@@ -53,12 +54,13 @@ export const Progress = styled.div<ProgressProps>`
   height: 0.25rem;
   background: ${(props) => props.theme.colors.text};
   position: relative;
-  top: 0.25rem;
+  top: 0.75rem;
   z-index: 999;
 `;
 
 export const ProgressDescription = styled.p`
   margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
   font-size: 0.75rem;
   font-weight: 600;
   text-align: right;

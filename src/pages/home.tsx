@@ -32,10 +32,6 @@ const Home: NextPage = () => {
       <Head>
         <title>Bookshelf</title>
         <link rel="shortcut icon" href="/icons/favicon.svg" type="image/x-icon" />
-        <link
-          rel="stylesheet"
-          href="node_modules/@glidejs/glide/dist/css/glide.core.min.css"
-        />
       </Head>
 
       <Navbar />
@@ -44,7 +40,7 @@ const Home: NextPage = () => {
         <S.TitleWrapper>
           <S.Row>
             <S.Title>Estou lendo</S.Title>
-            <S.Amount>(06)</S.Amount>
+            <S.Amount>(01)</S.Amount>
           </S.Row>
           <S.SeeAllButton>Ver todos</S.SeeAllButton>
         </S.TitleWrapper>
@@ -67,7 +63,7 @@ const Home: NextPage = () => {
         <S.TitleWrapper>
           <S.Row>
             <S.Title>Lidos</S.Title>
-            <S.Amount>(06)</S.Amount>
+            <S.Amount>(0)</S.Amount>
           </S.Row>
           <S.SeeAllButton>Ver todos</S.SeeAllButton>
         </S.TitleWrapper>
