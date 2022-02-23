@@ -69,5 +69,5 @@ export const BookList = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 1rem;
 `;

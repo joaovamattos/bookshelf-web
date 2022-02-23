@@ -9,6 +9,8 @@ export default [
       title: "Duna",
       authors: "Frank Hebert",
       pageCount: 700,
+      publisher: "Rocco",
+      publishedDate: "2003-12-09",
       description:
         "Uma estonteante mistura de aventura e misticismo, ecologia e política, este romance ganhador dos prêmios Hugo e Nebula deu início a uma das mais épicas histórias de toda a ficção científica. Duna é um triunfo da imaginação, que influenciará a literatura para sempre.",
     },
@@ -25,6 +27,8 @@ export default [
       title: "Battle Roayle",
       authors: "Koushun Takami",
       pageCount: 700,
+      publisher: "Rocco",
+      publishedDate: "2003-12-09",
       description:
         "Uma estonteante mistura de aventura e misticismo, ecologia e política, este romance ganhador dos prêmios Hugo e Nebula deu início a uma das mais épicas histórias de toda a ficção científica. Duna é um triunfo da imaginação, que influenciará a literatura para sempre.",
     },
@@ -41,6 +45,8 @@ export default [
       title: "As Duas Torres - Senhor dos Anéis parte II",
       authors: "J. R. R. Tolkien",
       pageCount: 400,
+      publisher: "Rocco",
+      publishedDate: "2003-12-09",
       description:
         "Uma estonteante mistura de aventura e misticismo, ecologia e política, este romance ganhador dos prêmios Hugo e Nebula deu início a uma das mais épicas histórias de toda a ficção científica. Duna é um triunfo da imaginação, que influenciará a literatura para sempre.",
     },
@@ -57,6 +63,8 @@ export default [
       title: "Harry Potter e o Prisioneiro de Azkaban",
       authors: "J. K. Rolling",
       pageCount: 300,
+      publisher: "Rocco",
+      publishedDate: "2003-12-09",
       description:
         "Uma estonteante mistura de aventura e misticismo, ecologia e política, este romance ganhador dos prêmios Hugo e Nebula deu início a uma das mais épicas histórias de toda a ficção científica. Duna é um triunfo da imaginação, que influenciará a literatura para sempre.",
     },
@@ -73,6 +81,8 @@ export default [
       title: "Eu sou a lenda",
       authors: "Richard Matheson",
       pageCount: 450,
+      publisher: "Rocco",
+      publishedDate: "2003-12-09",
       description:
         "Uma estonteante mistura de aventura e misticismo, ecologia e política, este romance ganhador dos prêmios Hugo e Nebula deu início a uma das mais épicas histórias de toda a ficção científica. Duna é um triunfo da imaginação, que influenciará a literatura para sempre.",
     },
@@ -89,6 +99,8 @@ export default [
       title: "Guerra do Velho",
       authors: "John Scalzi",
       pageCount: 228,
+      publisher: "Rocco",
+      publishedDate: "2003-12-09",
       description:
         "Uma estonteante mistura de aventura e misticismo, ecologia e política, este romance ganhador dos prêmios Hugo e Nebula deu início a uma das mais épicas histórias de toda a ficção científica. Duna é um triunfo da imaginação, que influenciará a literatura para sempre.",
     },
