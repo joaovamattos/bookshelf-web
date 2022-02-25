@@ -21,7 +21,7 @@ interface BookProps {
 function Book({ book }: BookProps) {
   return (
     <Container>
-      <BookCover src={book.volumeInfo.imageLinks.thumbnail ? book.volumeInfo.imageLinks.thumbnail : '/book-cover.png'} alt={book.volumeInfo.title} />
+      <BookCover src={book.volumeInfo.imageLinks?.thumbnail ? book.volumeInfo.imageLinks.thumbnail : '/book-cover.png'} alt={book.volumeInfo.title} />
       <Title>{book.volumeInfo.title}</Title>
       <Author>{book.volumeInfo.authors}</Author>
     </Container>

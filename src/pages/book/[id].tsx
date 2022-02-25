@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { DateTime } from "luxon";
 
@@ -11,20 +11,41 @@ import Loading from '../../components/Loading';
 
 import * as S from '../../styles/pages/Book';
 
-import books from "../../services/fakeBooks";
 import Select from '../../components/Select';
+import { getAPIClient } from '../../services/axios';
 
 interface BookList {
   label: String;
   value: String;
 }
 
-const Search: NextPage = () => {
+interface BookProps {
+  book: {
+    id: string;
+    volumeInfo: {
+      imageLinks: {
+        thumbnail: string | undefined;
+        smallThumbnail: string | undefined;
+      };
+      title: string;
+      authors: string;
+      pageCount: number;
+      description: string;
+      publisher: string;
+      publishedDate: string;
+    };
+  }
+}
+
+function Book({ book }: BookProps) {
   const [bookList, setBookList] = useState<BookList>({ value: "wantToRead", label: "Quero ler" });
   const router = useRouter();
   const { user, loading } = useAuth();
 
+  useEffect(() => {
+    console.log(book);
 
+  }, []);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -51,7 +72,7 @@ const Search: NextPage = () => {
   return (
     <S.Container>
       <Head>
-        <title>Bookshelf - {books[parseInt(router.query.id)].volumeInfo.title}</title>
+        <title>Bookshelf - {book.volumeInfo.title}</title>
         <link rel="shortcut icon" href="/icons/favicon.svg" type="image/x-icon" />
       </Head>
 
@@ -59,27 +80,27 @@ const Search: NextPage = () => {
 
       <S.Wrapper>
         <S.Row>
-          <S.BookCover src={books[parseInt(router.query.id)].volumeInfo.imageLinks.thumbnail ? books[parseInt(router.query.id)].volumeInfo.imageLinks.thumbnail : '/book-cover.png'} alt={books[parseInt(router.query.id)].volumeInfo.title} />
+          <S.BookCover src={book.volumeInfo.imageLinks.thumbnail ? book.volumeInfo.imageLinks.thumbnail : '/book-cover.png'} alt={book.volumeInfo.title} />
 
           <S.DescriptionWrapper>
-            <S.Title>{books[parseInt(router.query.id)].volumeInfo.title}</S.Title>
-            <S.Author>{books[parseInt(router.query.id)].volumeInfo.authors}</S.Author>
+            <S.Title>{book.volumeInfo.title}</S.Title>
+            <S.Author>{book.volumeInfo.authors}</S.Author>
             <S.InfoWrapper>
               <S.Label>Páginas:</S.Label>
-              <S.Info>{books[parseInt(router.query.id)].volumeInfo.pageCount}</S.Info>
+              <S.Info>{book.volumeInfo.pageCount}</S.Info>
             </S.InfoWrapper>
             <S.InfoWrapper>
               <S.Label>Editora:</S.Label>
-              <S.Info>{books[parseInt(router.query.id)].volumeInfo.publisher}</S.Info>
+              <S.Info>{book.volumeInfo.publisher}</S.Info>
             </S.InfoWrapper>
             <S.InfoWrapper>
               <S.Label>Data de lançamento:</S.Label>
-              <S.Info>{formatDate(books[parseInt(router.query.id)].volumeInfo.publishedDate)}</S.Info>
+              <S.Info>{formatDate(book.volumeInfo.publishedDate)}</S.Info>
             </S.InfoWrapper>
           </S.DescriptionWrapper>
         </S.Row>
 
-        <S.Description>{books[parseInt(router.query.id)].volumeInfo.description}</S.Description>
+        <S.Description>{book.volumeInfo.description}</S.Description>
 
         <Select setBookList={setBookList} bookList={bookList} />
 
@@ -95,4 +116,27 @@ const Search: NextPage = () => {
   );
 }
 
-export default Search;
+export default Book;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const apiClient = getAPIClient(ctx);
+
+  const response = await apiClient.get(`/volumes?q=${ctx.query.id}`);
+
+  if (!response.data.items) {
+    return {
+      redirect: {
+        destination: '/home',
+        permanent: false,
+      },
+    }
+  }
+
+  const book = response.data.items[0];
+
+  return {
+    props: {
+      book
+    },
+  };
+}

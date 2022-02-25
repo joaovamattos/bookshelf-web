@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -13,21 +13,67 @@ import NoBooksFound from '../components/NoBooksFound';
 import Book from '../components/Book';
 
 import * as S from '../styles/pages/Search';
+import { api } from '../services/api';
+import Link from 'next/link';
 
-import books from "../services/fakeBooks";
+interface BookProps {
+  id: string;
+  volumeInfo: {
+    imageLinks: {
+      thumbnail: string | undefined;
+      smallThumbnail: string | undefined;
+    };
+    title: string;
+    authors: string;
+    pageCount: number;
+    description: string;
+    publisher: string;
+    publishedDate: string;
+  };
+}
 
 const Search: NextPage = () => {
+  const [search, setSearch] = useState("");
+  const [books, setBooks] = useState<BookProps[]>([]);
+  const [notFound, setNotFound] = useState(false);
   const router = useRouter();
   const { user, loading } = useAuth();
   const { theme } = useTheme();
-
-  const noBooksFound = true;
 
   useEffect(() => {
     if (!loading && !user) {
       router.push('/');
     }
-  }, [user, loading])
+  }, [user, loading]);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (search === "") {
+        setNotFound(false);
+        setBooks([]);
+        return;
+      };
+
+      const loadBooks = async () => {
+        const response = await api.get(`/volumes?q=${search}&key=${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}`);
+
+        const data = response.data;
+        if (response.data.totalItems === 0) {
+          setBooks([]);
+          console.log('iff');
+
+          return setNotFound(true);
+        }
+
+        setNotFound(false);
+        setBooks(data.items);
+      }
+      loadBooks();
+    }, 500);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [search]);
 
   if (loading) {
     return <Loading />;
@@ -47,26 +93,32 @@ const Search: NextPage = () => {
         <S.Subtitle>Encontre o livro dos seus sonhos</S.Subtitle>
 
         <S.InputWrapper>
-          <S.Input type="text" placeholder="Digite para começar a procurar (Nome do livro ou ISBN)" autoFocus />
+          <S.Input
+            type="text"
+            placeholder="Digite para começar a procurar (Nome do livro ou ISBN)"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            autoFocus />
           <S.InputIcon>
             <FiSearch size={24} color={theme.colors.text} />
           </S.InputIcon>
         </S.InputWrapper>
 
-        {!books ? (
-          noBooksFound ? (
-            <NoBooksFound />
-          ) : (
-            <S.Image src="/knowledge.svg" alt="Mulher lendo" />
-          )) : (
-          <S.BookList>
-            {books && books.map(book => (
-              <Book book={book} key={book.id} />
-            ))}
-          </S.BookList>
+        {notFound ? <NoBooksFound /> : (
+          books.length > 0 ? (
+            <S.BookList>
+              {books && books.map(book => (
+                // <div onClick={() => console.log(book)} key={book.id}>
+                <div onClick={() => router.push(`/book/${book.id}`)} key={book.id}>
+                  <Book book={book} />
+                </div>
+              ))}
+            </S.BookList>
+          ) : <S.Image src="/knowledge.svg" alt="Mulher lendo" />
         )}
+
       </S.Wrapper>
-    </S.Container>
+    </S.Container >
   );
 }
 
