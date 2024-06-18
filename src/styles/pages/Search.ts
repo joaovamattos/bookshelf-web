@@ -66,8 +66,20 @@ export const Image = styled.img`
 `;
 
 export const BookList = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  width: 100%;
   gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+  @media (max-width: 42rem) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  @media (max-width: 35.75rem) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media (max-width: 27.25rem) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;

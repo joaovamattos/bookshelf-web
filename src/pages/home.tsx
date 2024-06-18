@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -15,6 +15,7 @@ import books from "../services/fakeBooks";
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const myRef = useRef(null);
   const { user, loading } = useAuth();
 
   useEffect(() => {
@@ -54,11 +55,17 @@ const Home: NextPage = () => {
           <S.SeeAllButton>Ver todos</S.SeeAllButton>
         </S.TitleWrapper>
 
-        <S.BookList>
-          {books && books.map(book => (
-            <Book book={book} key={book.id} />
-          ))}
-        </S.BookList>
+        <S.BookListRow>
+          <S.ScrollButton onClick={() => myRef.current.scrollBy(-120, 0)}>E</S.ScrollButton>
+
+          <S.BookList ref={myRef}>
+            {books && books.map(book => (
+              <Book book={book} key={book.id} />
+            ))}
+          </S.BookList>
+          <S.ScrollButton onClick={() => myRef.current.scrollBy(120, 0)}>D</S.ScrollButton>
+
+        </S.BookListRow>
 
         <S.TitleWrapper>
           <S.Row>

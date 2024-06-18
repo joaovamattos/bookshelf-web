@@ -6,6 +6,7 @@ import { FiSearch } from 'react-icons/fi';
 
 import { useAuth } from '../hooks/useAuth';
 import { useTheme } from '../hooks/useTheme';
+import { api } from '../services/api';
 
 import Navbar from '../components/Navbar';
 import Loading from '../components/Loading';
@@ -13,8 +14,6 @@ import NoBooksFound from '../components/NoBooksFound';
 import Book from '../components/Book';
 
 import * as S from '../styles/pages/Search';
-import { api } from '../services/api';
-import Link from 'next/link';
 
 interface BookProps {
   id: string;
@@ -60,8 +59,6 @@ const Search: NextPage = () => {
         const data = response.data;
         if (response.data.totalItems === 0) {
           setBooks([]);
-          console.log('iff');
-
           return setNotFound(true);
         }
 
@@ -69,7 +66,7 @@ const Search: NextPage = () => {
         setBooks(data.items);
       }
       loadBooks();
-    }, 500);
+    }, 1000);
     return () => {
       clearTimeout(handler);
     };
@@ -108,7 +105,6 @@ const Search: NextPage = () => {
           books.length > 0 ? (
             <S.BookList>
               {books && books.map(book => (
-                // <div onClick={() => console.log(book)} key={book.id}>
                 <div onClick={() => router.push(`/book/${book.id}`)} key={book.id}>
                   <Book book={book} />
                 </div>

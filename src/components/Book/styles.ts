@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   cursor: pointer;
-  max-width: 6.25rem;
 `;
 
 export const BookCover = styled.img`
-  min-width: 6.25rem;
+  width: 6.25rem;
   height: 9.375rem;
   object-fit: cover;
 `;

@@ -111,9 +111,15 @@ export const ButtonsWrapper = styled.div`
 export const Button = styled.button`
   height: 3rem;
   padding: 0 1rem;
-  background: ${(props) => props.theme.colors.text};
   border: 0;
   border-radius: 0.25rem;
+
+  background: ${(props) => props.theme.colors.text};
+  background-image: linear-gradient(#4a26ab, #4a26ab);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  background-position-x: right;
+  transition: background-size 0.5s;
 
   font-size: 1rem;
   font-weight: 600;
@@ -122,14 +128,15 @@ export const Button = styled.button`
   white-space: nowrap;
 
   cursor: pointer;
-  transition: 0.2s filter;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   &:hover {
-    filter: brightness(0.75);
+    background-image: linear-gradient(#4a26ab, #4a26ab);
+    background-size: 100% 100%;
+    background-position-x: left;
   }
 
   & img {
@@ -140,9 +147,15 @@ export const Button = styled.button`
 export const OutlinedButton = styled.a`
   height: 3rem;
   padding: 0 1rem;
-  background: ${(props) => props.theme.colors.background};
   border: 2px solid ${(props) => props.theme.colors.text};
   border-radius: 0.25rem;
+
+  background: ${(props) => props.theme.colors.background};
+  background-image: linear-gradient(#4a26ab, #4a26ab);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  background-position-x: right;
+  transition: background-size 0.5s;
 
   font-size: 1rem;
   font-weight: 600;
@@ -151,7 +164,6 @@ export const OutlinedButton = styled.a`
   cursor: pointer;
   white-space: nowrap;
 
-  transition: 0.2s filter;
   text-decoration: none;
 
   display: flex;
@@ -159,7 +171,14 @@ export const OutlinedButton = styled.a`
   justify-content: center;
 
   &:hover {
-    filter: brightness(0.75);
+    background-image: linear-gradient(#4a26ab, #4a26ab);
+    background-size: 100% 100%;
+    background-position-x: left;
+    color: ${(props) => props.theme.colors.foreground};
+    border-color: ${(props) => props.theme.colors.foreground};
+    span {
+      filter: brightness(100);
+    }
   }
 
   & img {

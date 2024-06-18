@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { GetServerSideProps, NextPage } from 'next';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { DateTime } from "luxon";
 
+import { collection, addDoc } from "firebase/firestore";
+import { database } from "../../services/firebase";
 import { useAuth } from '../../hooks/useAuth';
 
 import Navbar from '../../components/Navbar';
@@ -42,10 +44,19 @@ function Book({ book }: BookProps) {
   const router = useRouter();
   const { user, loading } = useAuth();
 
-  useEffect(() => {
-    console.log(book);
+  async function handleSubmit() {
+    console.log({
+      book,
+      bookList: bookList.value
+    });
 
-  }, []);
+    try {
+      const docRef = await addDoc(collection(database, bookList.value), book);
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
 
   useEffect(() => {
     if (!loading && !user) {
@@ -80,7 +91,7 @@ function Book({ book }: BookProps) {
 
       <S.Wrapper>
         <S.Row>
-          <S.BookCover src={book.volumeInfo.imageLinks.thumbnail ? book.volumeInfo.imageLinks.thumbnail : '/book-cover.png'} alt={book.volumeInfo.title} />
+          <S.BookCover src={book.volumeInfo.imageLinks?.thumbnail ? book.volumeInfo.imageLinks.thumbnail : '/book-cover.png'} alt={book.volumeInfo.title} />
 
           <S.DescriptionWrapper>
             <S.Title>{book.volumeInfo.title}</S.Title>
@@ -104,7 +115,7 @@ function Book({ book }: BookProps) {
 
         <Select setBookList={setBookList} bookList={bookList} />
 
-        <S.Button>
+        <S.Button onClick={() => handleSubmit()}>
           <S.ButtonText>Adicionar a lista</S.ButtonText>
         </S.Button>
 

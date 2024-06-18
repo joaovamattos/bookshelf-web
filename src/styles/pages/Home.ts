@@ -67,6 +67,7 @@ export const BookList = styled.div`
   padding-bottom: 1rem;
   max-width: 42rem;
   overflow-x: scroll;
+  scroll-behavior: smooth;
 
   ::-webkit-scrollbar {
     width: 0.25rem;
@@ -80,4 +81,23 @@ export const BookList = styled.div`
   ::-webkit-scrollbar-thumb {
     background: ${(props) => props.theme.colors.text};
   }
+`;
+
+export const BookListRow = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+`;
+
+export const ScrollButton = styled.button`
+  min-width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: ${(props) => props.theme.colors.foreground};
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
 `;
